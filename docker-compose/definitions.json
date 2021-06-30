@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "OIUox9kxaUb6IKDZSprdxLOTeqxhtg8Crz8n+BLDe0BgECr0",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator",
+      "limits": {}
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "policies": [
+    {
+      "vhost": "/",
+      "name": "ha-fed",
+      "pattern": ".*",
+      "apply-to": "queues",
+      "priority": 1,
+      "definition": {
+        "federation-upstream-set": "all",
+        "ha-sync-mode": "automatic",
+        "ha-mode": "nodes",
+        "ha-params": [
+          "rabbit@rmq-1",
+          "rabbit@rmq-2",
+          "rabbit@rmq-3"
+        ]
+      }
+    }
+  ]
+}

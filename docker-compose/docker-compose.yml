@@ -1,0 +1,33 @@
+version: '3'
+
+networks:
+  rabbits:
+    external: false
+
+services:
+  rmq-1:
+    image: 'rabbit-cluster'
+    hostname: 'rmq-1'
+    container_name: 'rmq-1'
+    ports:
+      - '8081:15672'
+    networks:
+      - rabbits
+
+  rmq-2:
+    image: 'rabbit-cluster'
+    hostname: 'rmq-2'
+    container_name: 'rmq-2'
+    ports:
+      - '8082:15672'
+    networks:
+      - rabbits
+
+  rmq-3:
+    image: 'rabbit-cluster'
+    hostname: 'rmq-3'
+    container_name: 'rmq-3'
+    ports:
+      - '8083:15672'
+    networks:
+      - rabbits
